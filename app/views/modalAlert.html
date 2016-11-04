@@ -1,0 +1,73 @@
+<style>
+    
+    @font-face {
+    font-family: 'Oswald';
+    src:
+        url('/fonts/alertas/fonts/Oswald-Regular.ttf') format("truetype");
+    }
+
+    @font-face {
+    font-family: 'Lato';
+    src:
+        url('/fonts/alertas/fonts/Lato-Regular.ttf') format("truetype");
+    }
+    .dialog__content{
+        font-family: "Lato", sans-serif;       
+    }
+    .headerAffected{
+         padding: 10px;
+         font-size: 30px;
+    }
+    .headerAffected .line{
+        margin-bottom: 5px;
+    }
+    .red{
+         color: red;
+    }
+    .wrapperAffected{        
+        top: 200px!important;
+        height: 760px;
+    }
+    .wrapperAffected img{
+        max-width: 350px;    
+        width: 350px;
+    }
+    .wrapperDetail{
+        padding: 15px;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 28px;
+        text-align: justify!important;
+        text-justify: inter-word;
+    }
+    
+    
+</style>    
+
+<div id="alert-detail" ng-class="['dialog', 'dialog--open']">
+		
+		<div class="dialog__overlay"></div> 
+		 
+		  
+		<div class="dialog__content">
+			<header>
+				<h1>{{evento.region}}</h1>
+				<h2>MAGNITUDE:  {{evento.magnitude}}</h2>
+			</header>
+
+			<div class="mobileWrapperContentModal">
+				<section class="wrapperDetail" ng-bind-html="evento.text"></section>
+
+				<section class="headerAffected">
+                                    <div class="line">DATA: <span class="red">{{evento.timedate}}</span></div>
+                                    <div class="line"> MORTOS: <span class="red">{{evento.deaths}}</span> </div>
+				</section>
+				
+				<section class="wrapperAffected">
+                                    <div ng-show="evento.images" ng-repeat="image in evento.images"><img ng-src="{{getWindowsPath(image)}}"></div>                                    
+				</section>
+			</div>
+
+			<a href="#" class="action close" ng-mouseover="close()" data-dialog-close>u</a>
+		</div>
+</div>

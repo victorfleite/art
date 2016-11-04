@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>SISMOLOGIC-MAP</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="favicon/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff"> 
+
+        <link rel="stylesheet" href="/node_modules/angular-openlayers-directive/node_modules/openlayers/dist/ol.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css">
+
+
+    </head>
+    <body ng-app="alertAsApp" ng-controller="mainController" ng-class="loader" ng-init="initialize();">
+
+        <div id="loader"></div>
+
+        <div id="logo-inmet-omm">
+            <!--a href="http://inmet.gov.br" tooltip="{title:'Instituto Nacional de Meteorologia - INMET', position:'top'}" title="" class="inmet" target="_blank"></a-->
+        </div>
+
+    <ng-view></ng-view>
+
+    <style>
+        a.trigger.red >i {
+            background-image: url("./img/marker-red.png");
+            width: 64px;
+            height: 62px;
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+        }
+        a.trigger.orange >i {
+            background-image: url("./img/marker-orange.png");
+            width: 64px;
+            height: 62px;
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+        }
+        a.trigger.yellow >i {
+            background-image: url("./img/marker-yellow.png");
+            width: 64px;
+            height: 62px;
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+        }
+        #init-map{
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+    </style>
+    <div id="init-map" ng-mouseover="initMap()">
+        <img src="/mapa/menu/init.png" width="64" height="64">       
+    </div>
+    <section id="map">
+        <openlayers  ol-center="mapCenterConfig.center" custom-layers="true" width="100%" height="100%" ol-view="view">
+            <ol-layer ol-layer-properties="mapbox"></ol-layer>
+            <ol-layer ol-layer-properties="osm"></ol-layer>
+            <ol-marker ng-repeat="event in events" name="event.region" lat="event.lat" lon="event.lon" ol-style="iconTransparent">
+                <a ng-mouseover="openModalAlert(event)"  ng-class="['trigger', getIconColor(event.magnitude)]">
+                    <i></i>
+                </a>
+            </ol-marker>
+        </openlayers>		
+    </section>
+
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular-route/angular-route.min.js" type="text/javascript"></script>
+    <script src="js/angular-sanitize/angular-sanitize.min.js" type="text/javascript"></script>
+    <script src="js/angular-translate/angular-translate.min.js" type="text/javascript"></script>
+    <script src="js/angular-modal-service/dst/angular-modal-service.min.js" type="text/javascript"></script>
+
+    <script src="/node_modules/angular-openlayers-directive/node_modules/openlayers/dist/ol.js"></script>
+    <script src="/node_modules/angular-openlayers-directive/dist/angular-openlayers-directive.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/services/util.js"></script>
+    <script src="app/services/pop-up.js"></script>
+    <script src="app/services/event.js"></script>
+    <script src="app/controllers/main.js"></script>
+    <script src="app/controllers/modal-alert.js"></script>
+
+
+
+</body>
+</html>
