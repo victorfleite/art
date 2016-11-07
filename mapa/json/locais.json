@@ -1,0 +1,30 @@
+{
+    "count": "2",
+    "locais": [{
+            "funcionamento": "Das 8:00 às 18:00",
+            "endereco": "SRPN - Asa Norte",
+            "telefone": "61 3245-4563",
+            "site": "www.algum.com.br",
+            "lat": -15.784047,
+            "lon": -47.899103,
+            "iconColor": "red",
+            "region": "Estádio Mané Garrincha",
+            "deaths": "1526",
+            "images": ["Topografic_map_of_Tibetan_Plateau.png"],
+            "text": "Pelo menos 1.500 pessoas foram mortas em todo Tibete oriental e Assam, na Índia, quando esse tremor sacudiu a região.<br><br> Rachaduras no solo, grandes deslizamentos de terra e vulcões de areia atingiram a área.<br><br> O terremoto foi sentido nas Províncias de Sichuan e Yunnan da China, e tão distantes como Calcutá, India.<br><br>O tremor causou grandes deslizamentos de terra que bloquearam rios. <br><br>Quando os rios finalmente colidiram através das paredes dos escombros, ondas inundaram várias aldeias e mataram centenas de pessoas.<br><br>Este terremoto é comumente chamado o terremoto Assam-Tibet ou do terremoto Assam, mesmo sendo o epicentro no Tibete.<br><br> O terremoto ocorreu no cruzamento da colisão mais vigorosa das placas continentais do planeta, onde a placa continental indiana choca com a placa da eurásia que mergulha por baixo.<br><br> O acidente em câmera lenta ajudou a criar o enorme Himalaia."
+        },       
+        {
+            "funcionamento": "Das 8:00 às 18:00",
+            "endereco": "Setor Cultural Sul SCTS 2 - SHCS",
+            "telefone": "61 3245-4563",
+            "site": "www.algum.com.br",            
+            "lat": -15.797468,
+            "lon": -47.878075,
+            "iconColor": "orange",
+            "region": "Museu Nacional",
+            "deaths": "0",
+            "images": ["3122016EarthquakeCreditUSGS.jpg"],
+            "text": "Iaska tinha sido um estado com apenas 7 anos, quando este grande terremoto desencadeou um tsunami de mais de 30 pés (10 metros).<br><br> Apesar de seu tamanho, o tremor causou poucos danos, devido à sua localização remota na ponta das Ilhas Aleutas. <br><br>O tsunami foi relatado no Havaí e se espalhou tão longe até o Japão. <br><br>O tremor foi o resultado do mergulho placa do pacífico abaixo da placa norte-americana em Alaska-Aleutian, que tem sido o local de muitos terremotos. <br><br>O tremor rachou prédios,dividiu uma pista de asfalto e fez fissuras na estação Loran EUA Guarda Costeira."
+        }
+    ]
+}

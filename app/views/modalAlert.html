@@ -3,34 +3,38 @@
     @font-face {
     font-family: 'Oswald';
     src:
-        url('/fonts/alertas/fonts/Oswald-Regular.ttf') format("truetype");
+        url('fonts/alertas/fonts/Oswald-Regular.ttf') format("truetype"); 
     }
 
     @font-face {
     font-family: 'Lato';
     src:
-        url('/fonts/alertas/fonts/Lato-Regular.ttf') format("truetype");
+        url('fonts/alertas/fonts/Lato-Regular.ttf') format("truetype");
     }
     .dialog__content{
         font-family: "Lato", sans-serif;       
     }
-    .headerAffected{
-         padding: 10px;
-         font-size: 30px;
+    
+  
+    .line .header{
+         color: red;
+         line-height: 28px;
     }
-    .headerAffected .line{
-        margin-bottom: 5px;
-    }
-    .red{
+    .line .header{
          color: red;
     }
     .wrapperAffected{        
-        top: 200px!important;
-        height: 760px;
+        top: 80px!important;
     }
     .wrapperAffected img{
         max-width: 350px;    
         width: 350px;
+        margin-bottom: 5px;
+    }
+    .wrapperAffected .line{
+        margin-bottom: 5px;
+        padding: 10px;
+        font-size: 20px;
     }
     .wrapperDetail{
         padding: 15px;
@@ -51,23 +55,23 @@
 		  
 		<div class="dialog__content">
 			<header>
-				<h1>{{evento.region}}</h1>
-				<h2>MAGNITUDE:  {{evento.magnitude}}</h2>
+				<h1>{{local.region}}</h1>
 			</header>
 
 			<div class="mobileWrapperContentModal">
-				<section class="wrapperDetail" ng-bind-html="evento.text"></section>
+				<section class="wrapperDetail" ng-bind-html="local.text"></section>
 
-				<section class="headerAffected">
-                                    <div class="line">DATA: <span class="red">{{evento.timedate}}</span></div>
-                                    <div class="line"> MORTOS: <span class="red">{{evento.deaths}}</span> </div>
-				</section>
 				
 				<section class="wrapperAffected">
-                                    <div ng-show="evento.images" ng-repeat="image in evento.images"><img ng-src="{{getWindowsPath(image)}}"></div>                                    
+                                    <div ng-show="local.images" ng-repeat="image in local.images"><img ng-src="{{'img/'+image}}"></div> 
+                                
+                                    <div class="line"><div class='header'>Funcionamento</div> <div class='value'>{{local.funcionamento}}</div></div>
+                                    <div class="line"><div class='header'>Endereço</div> <div class='value'>{{local.endereco}}</div></div>
+                                    <div class="line"><div class='header'>Telefone</div> <div class='value'>{{local.telefone}}</div></div>
+                                    <div class="line"><div class='header'>Site</div> <div class='value'>{{local.site}}</div></div>
 				</section>
 			</div>
 
-			<a href="#" class="action close" ng-mouseover="close()" data-dialog-close>u</a>
+			<a href="#" class="action close" ng-click="close()" data-dialog-close>u</a>
 		</div>
 </div>

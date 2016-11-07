@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', '$location', '$q', '$filter', '$interval', '$routeParams', 'ModalService', 'popUpService', 'eventService', 'CONSTANTES', 'LOADER', function ($rootScope, $scope, $log, $translate, $location, $q, $filter, $interval, $routeParams, modalService, popUpService, eventService, CONSTANTES, LOADER) {
+app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', '$location', '$q', '$filter', '$interval', '$routeParams', 'ModalService', 'popUpService', 'localService', 'CONSTANTES', 'LOADER', function ($rootScope, $scope, $log, $translate, $location, $q, $filter, $interval, $routeParams, modalService, popUpService, localService, CONSTANTES, LOADER) {
 
         // Variaveis Gerais da Aplicação 
 
@@ -15,26 +15,18 @@ app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', 
         angular.extend($scope, {
             mapCenterConfig: {
                 "center":
-                        {"lat": 0, "lon": 0, "zoom": 3}
+                        {"lat": -15.799765, "lon": -47.864472, "zoom": 13}
             },
             view: {
                 rotation: 0
             },
             osm: {
-                    visible: true,
-                    opacity: 0.6,
-                    source: {
-                        type: 'OSM'
-                    }
-                },
-            mapbox: {
-                    visible: true,
-                    opacity: 0.8,
-                    source: {
-                        type: 'TileJSON',
-                        url: '/mapa/tiles.json'
-                    }
-            },    
+                visible: true,
+                opacity: 0.6,
+                source: {
+                    type: 'OSM'
+                }
+            },          
             iconTransparent: {
                 "image": {
                     "icon": {
@@ -57,21 +49,12 @@ app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', 
          */
         $scope.initialize = function () {
             $rootScope.loader = LOADER.LOADED_CLASS;
-            var events = eventService.getEventList();
-            $scope.events = events.earthquakes;
-            //$log.log($scope.events);
+            var events = localService.getLocalList().then(function(response){
+                $scope.locais = response.data.locais;
+            });
+            
         }
-        $scope.getIconColor = function (magnitude) {
-            var value = parseFloat(magnitude);
-            var iconColor = 'yellow';
-            if (value > 3 && value < 4) {
-                return "orange";
-            }
-            if (value > 4) {
-                return "red";
-            }
-            return "yellow";
-        }
+   
 
         /**
          * Set as configurações Iniciais do mapa (centro, wms)
@@ -79,7 +62,7 @@ app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', 
         $scope.initMap = function () {
             $scope.mapCenterConfig =   {
                 "center":
-                        {"lat": 0, "lon": 0, "zoom": 3}
+                        {"lat": -15.799765, "lon": -47.864472, "zoom": 13}
             };
             $scope.view = {
                 rotation: 0
@@ -103,16 +86,16 @@ app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', 
         /**
          * Abrir Modal de Alertas
          */
-        $scope.openModalAlert = function (evento) {
+        $scope.openModalLocal = function (local) {
 
             popUpService.showSingletonModal({
                 templateUrl: CONSTANTES.VIEW_FOLDER + '/views/modalAlert.html',
                 controller: "ModalAlertController",
                 inputs: {
-                    'evento': evento
+                    'local': local
                 }
             }, function (modal) {
-                modal.close.then(function (result) {
+                modal.close.then(function (local) {
 
                 });
             }
@@ -326,23 +309,14 @@ app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', 
         /**
          * Listener que recebe solicitação de Controller filho (modal-alert.js) para setar somente a emergencia passada no mapa
          */
-        $rootScope.$on('setEventOnMap', function (event, args) {
-            var evento = args.evento;
+        $rootScope.$on('setLocalOnMap', function (local, args) {
+            var local = args.local;
             // Setar centro do mapa a partir da emergencia passada
-            $scope.mapCenterConfig.center.lat = evento.lat;
-            $scope.mapCenterConfig.center.lon = evento.lon + 65 ;
+            $scope.mapCenterConfig.center.lat = local.lat;
+            $scope.mapCenterConfig.center.lon = local.lon + 65 ;
         });
 
-        /**
-         * Listener que recebe solicitação de Controller filho (modal-alert.js) para setar o mapa na visao de todos os alertas a partir das tabs selecionadas.
-         */
-        $rootScope.$on('removeEmergenciaOnMap', function (event, args) {
-            // Resetar Configuracoes de centro de mapa
-            $scope.resetMap();
-            // Setar somente as emergencias da tab selecionada
-            $scope.setEmergenciasSelecionadas();
-        });
-
+       
         /**
          * Listener para eventos de Loader
          */
