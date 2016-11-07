@@ -34,7 +34,7 @@ app.controller('mainController', ['$rootScope', '$scope', '$log', '$translate', 
                         "anchorXUnits": "fraction",
                         "anchorYUnits": "fraction",
                         "opacity": 0,
-                        "src": "img/marker-red.png"
+                        "src": "img/marker-green.png"
                     }
                 }
             }

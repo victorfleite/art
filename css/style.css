@@ -1363,7 +1363,7 @@ h6 { font-size: 18px; }
 /* line 1293, ../sass/_layout.sass */
 .popup-label.marker a.alert-ventos-costeiros-copy i:after { content: "s"; }
 /* line 1295, ../sass/_layout.sass */
-.popup-label.marker:hover { -moz-transform: scale(2, 2); -ms-transform: scale(2, 2); -webkit-transform: scale(2, 2); transform: scale(2, 2); }
+/*.popup-label.marker:hover { -moz-transform: scale(2, 2); -ms-transform: scale(2, 2); -webkit-transform: scale(2, 2); transform: scale(2, 2); }*/
 
 /* line 1306, ../sass/_layout.sass */
 #menuMobile { display: none; z-index: 4; right: 0; position: fixed; opacity: 1; }
